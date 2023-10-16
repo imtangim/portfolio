@@ -6,7 +6,8 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="./assets/1.png" alt="project-screenshot" width="200" height="300/"> <img src="https://raw.githubusercontent.com/imtangim/chat_app/master/assets/1.png" alt="project-screenshot" width="200" height="300/"> <img src="./assets/3.png" alt="project-screenshot" width="200" height="300/"> <img src="./assets/4.JPG" alt="project-screenshot" width="600" height="500/">
+<img src="./assets/ss/1.PNG" alt="project-screenshot"> <br>
+<img src="./assets/ss/2.PNG" alt="project-screenshot" >
 
 <h2>🚀 Demo</h2>
 

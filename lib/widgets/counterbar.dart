@@ -52,7 +52,7 @@ class CounterBar extends StatelessWidget {
       // Parse and return the JSON data.
       return int.parse(data['items'][0]["statistics"]['videoCount']);
     } else {
-      throw Exception('Failed to load GitHub repositories');
+      throw Exception('Failed to have video count');
     }
   }
 
@@ -175,9 +175,15 @@ class CounterBar extends StatelessWidget {
                           );
                         } else if (snapshot.hasData) {
                           int num = snapshot.data!;
+                          print(num);
                           return HighLight(
                             counter: AnimatedCounter(data: num, text: "+"),
                             label: "Videos",
+                          );
+                        } else if (snapshot.hasError) {
+                          return HighLight(
+                            counter: AnimatedCounter(data: 0, text: "+"),
+                            label: "",
                           );
                         } else {
                           return Container();
@@ -268,6 +274,7 @@ class CounterBar extends StatelessWidget {
                       );
                     } else if (snapshot.hasData) {
                       int num = snapshot.data!;
+                      
                       return HighLight(
                         counter: AnimatedCounter(data: num, text: "+"),
                         label: "Videos",
