@@ -30,7 +30,7 @@ class MyInfo extends StatelessWidget {
               "Flutter Developer & Founder of \n WittyWidget",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.w300,
                 height: 1.5,
               ),
             ),

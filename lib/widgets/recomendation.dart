@@ -15,8 +15,8 @@ class Recomendation extends StatelessWidget {
           "Recomendation",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Padding(
-          padding: const EdgeInsets.all(defaultPadding),
+        const Padding(
+          padding: EdgeInsets.all(defaultPadding),
           child: SizedBox(
             width: double.maxFinite,
             child: Center(

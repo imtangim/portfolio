@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:portfolio/models/secrets.dart';
+import 'package:portfolio/responsive.dart';
 
 import 'package:portfolio/widgets/animatecounter.dart';
 
@@ -30,7 +31,7 @@ class CounterBar extends StatelessWidget {
   Future<int> subcribercounter() async {
     final response = await http.get(
       Uri.parse(
-          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key=AIzaSyAN9pmiEdVfb9N927QllQWYE-_8lmWAXQQ'),
+          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key=$apiyoutube'),
     );
     dynamic data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -44,7 +45,7 @@ class CounterBar extends StatelessWidget {
   Future<int> videocount() async {
     final response = await http.get(
       Uri.parse(
-          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key=AIzaSyAN9pmiEdVfb9N927QllQWYE-_8lmWAXQQ'),
+          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key=$apiyoutube'),
     );
     dynamic data = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -106,93 +107,197 @@ class CounterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: defaultPadding),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FutureBuilder(
-            future: subcribercounter(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const HighLight(
-                  counter: AnimatedCounter(data: 0, text: "+"),
-                  label: "Subscriber",
-                );
-              } else if (snapshot.hasData) {
-                int num = snapshot.data!;
-                return HighLight(
-                  counter: AnimatedCounter(data: num, text: "+"),
-                  label: "Subscriber",
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-          const SizedBox(
-            width: defaultPadding,
-          ),
-          FutureBuilder(
-            future: fetchGitHubRepos(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const HighLight(
-                  counter: AnimatedCounter(data: 0, text: "+"),
-                  label: "Projects",
-                );
-              } else if (snapshot.hasData) {
-                int num = snapshot.data!;
-                return HighLight(
-                  counter: AnimatedCounter(data: num, text: "+"),
-                  label: "Projects",
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-          const SizedBox(
-            width: defaultPadding,
-          ),
-          FutureBuilder(
-            future: videocount(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const HighLight(
-                  counter: AnimatedCounter(data: 0, text: "+"),
-                  label: "Videos",
-                );
-              } else if (snapshot.hasData) {
-                int num = snapshot.data!;
-                return HighLight(
-                  counter: AnimatedCounter(data: num, text: "+"),
-                  label: "Videos",
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-          FutureBuilder(
-            future: getGitHubStarsCount(token),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const HighLight(
-                  counter: AnimatedCounter(data: 1, text: "+"),
-                  label: "Stars",
-                );
-              } else if (snapshot.hasData) {
-                int num = snapshot.data!;
-                return HighLight(
-                  counter: AnimatedCounter(data: num, text: "+"),
-                  label: "Stars",
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-        ],
-      ),
+      child: Responsive.isMobileLarge(context)
+          ? Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FutureBuilder(
+                      future: subcribercounter(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const HighLight(
+                            counter: AnimatedCounter(data: 0, text: "+"),
+                            label: "Subscriber",
+                          );
+                        } else if (snapshot.hasData) {
+                          int num = snapshot.data!;
+                          return HighLight(
+                            counter: AnimatedCounter(data: num, text: "+"),
+                            label: "Subscriber",
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      width: defaultPadding,
+                    ),
+                    FutureBuilder(
+                      future: fetchGitHubRepos(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const HighLight(
+                            counter: AnimatedCounter(data: 0, text: "+"),
+                            label: "Projects",
+                          );
+                        } else if (snapshot.hasData) {
+                          int num = snapshot.data!;
+                          return HighLight(
+                            counter: AnimatedCounter(data: num, text: "+"),
+                            label: "Projects",
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: defaultPadding,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    FutureBuilder(
+                      future: videocount(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const HighLight(
+                            counter: AnimatedCounter(data: 0, text: "+"),
+                            label: "Videos",
+                          );
+                        } else if (snapshot.hasData) {
+                          int num = snapshot.data!;
+                          return HighLight(
+                            counter: AnimatedCounter(data: num, text: "+"),
+                            label: "Videos",
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      width: defaultPadding,
+                    ),
+                    FutureBuilder(
+                      future: getGitHubStarsCount(token),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const HighLight(
+                            counter: AnimatedCounter(data: 1, text: "+"),
+                            label: "Stars",
+                          );
+                        } else if (snapshot.hasData) {
+                          int num = snapshot.data!;
+                          return HighLight(
+                            counter: AnimatedCounter(data: num, text: "+"),
+                            label: "Stars",
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ],
+                )
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FutureBuilder(
+                  future: subcribercounter(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const HighLight(
+                        counter: AnimatedCounter(data: 0, text: "+"),
+                        label: "Subscriber",
+                      );
+                    } else if (snapshot.hasData) {
+                      int num = snapshot.data!;
+                      return HighLight(
+                        counter: AnimatedCounter(data: num, text: "+"),
+                        label: "Subscriber",
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+                const SizedBox(
+                  width: defaultPadding,
+                ),
+                FutureBuilder(
+                  future: fetchGitHubRepos(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const HighLight(
+                        counter: AnimatedCounter(data: 0, text: "+"),
+                        label: "Projects",
+                      );
+                    } else if (snapshot.hasData) {
+                      int num = snapshot.data!;
+                      return HighLight(
+                        counter: AnimatedCounter(data: num, text: "+"),
+                        label: "Projects",
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+                const SizedBox(
+                  width: defaultPadding,
+                ),
+                FutureBuilder(
+                  future: videocount(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const HighLight(
+                        counter: AnimatedCounter(data: 0, text: "+"),
+                        label: "Videos",
+                      );
+                    } else if (snapshot.hasData) {
+                      int num = snapshot.data!;
+                      return HighLight(
+                        counter: AnimatedCounter(data: num, text: "+"),
+                        label: "Videos",
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+                FutureBuilder(
+                  future: getGitHubStarsCount(token),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const HighLight(
+                        counter: AnimatedCounter(data: 1, text: "+"),
+                        label: "Stars",
+                      );
+                    } else if (snapshot.hasData) {
+                      int num = snapshot.data!;
+                      return HighLight(
+                        counter: AnimatedCounter(data: num, text: "+"),
+                        label: "Stars",
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              ],
+            ),
     );
   }
 }

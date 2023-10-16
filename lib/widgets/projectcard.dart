@@ -2,11 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants.dart';
+import 'package:portfolio/models/secrets.dart';
+import 'package:portfolio/responsive.dart';
 
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shimmer/shimmer.dart';
 
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 
 class ProjectCard extends StatelessWidget {
@@ -26,13 +29,18 @@ class ProjectCard extends StatelessWidget {
   final String language;
   final String fulltile;
 
-  void redirectToNewURL(String newURL) {
-    html.window.open(newURL, "Read More");
+ 
+  void redirectToNewURL(String newURL) async {
+    final Uri url = Uri.parse(newURL);
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   Future<List<String>> fetchrepolang() async {
     final response = await http.get(
       Uri.parse(language),
+      headers: {'Authorization': 'Bearer $token'},
     );
 
     dynamic data = json.decode(response.body);
@@ -43,6 +51,21 @@ class ProjectCard extends StatelessWidget {
     } else {
       throw Exception('Failed to load GitHub repositories');
     }
+  }
+
+  double calculateDynamicFontSize(BuildContext context, double baseSize) {
+    // Get the screen width (or height, depending on your preference).
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Define a reference screen width (or height) to calculate a scaling factor.
+    const referenceScreenWidth =
+        280.0; // Change this to your preferred reference.
+
+    // Calculate the scaling factor.
+    double scaleFactor = screenWidth / referenceScreenWidth;
+
+    // Calculate the dynamic font size.
+    return baseSize * scaleFactor;
   }
 
   @override
@@ -64,9 +87,13 @@ class ProjectCard extends StatelessWidget {
             const Spacer(),
             Text(
               "Title: $fulltile",
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(height: 1.5),
+              style: TextStyle(
+                  height: 1.5,
+                  fontSize: Responsive.isMobile(context)
+                      ? calculateDynamicFontSize(context, 13)
+                      : 16),
             ),
             const Spacer(),
             Text(
@@ -94,9 +121,21 @@ class ProjectCard extends StatelessWidget {
                       "Languages Used: ${languages!.join(', ')}";
                   return Text(
                     languageText,
-                    maxLines: 2,
+                    maxLines: Responsive.isDesktop(context)
+                        ? 3
+                        : Responsive.isMobileLarge(context)
+                            ? 1
+                            : Responsive.isTablet(context)
+                                ? 2
+                                : Responsive.isMobile(context)
+                                    ? 1
+                                    : 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(height: 1.5),
+                    style: TextStyle(
+                        height: 1.5,
+                        fontSize: Responsive.isMobile(context)
+                            ? calculateDynamicFontSize(context, 13)
+                            : 16),
                   );
                 }
               },

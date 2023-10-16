@@ -1,16 +1,34 @@
-# portfolio
+<h1 align="center" id="title">Chature - A simple Text Base app</h1>
 
-A new Flutter project.
+<p align="center"><img src="https://socialify.git.ci/imtangim/portfolio/image?language=1&name=1&owner=1&pattern=Solid&stargazers=1&theme=Auto" alt="project-image"></p>
 
-## Getting Started
+<p id="description"></p>
 
-This project is a starting point for a Flutter application.
+<h2>Project Screenshots:</h2>
 
-A few resources to get you started if this is your first Flutter project:
+<img src="./assets/1.png" alt="project-screenshot" width="200" height="300/"> <img src="https://raw.githubusercontent.com/imtangim/chat_app/master/assets/1.png" alt="project-screenshot" width="200" height="300/"> <img src="./assets/3.png" alt="project-screenshot" width="200" height="300/"> <img src="./assets/4.JPG" alt="project-screenshot" width="600" height="500/">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<h2>🚀 Demo</h2>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[![Video](https://img.youtube.com/vi/vuGF1sW_yiI/maxresdefault.jpg)](https://www.youtube.com/watch?v=vuGF1sW_yiI)
+
+[Watch the Video](https://youtu.be/vuGF1sW_yiI)
+
+<h2>🧐 Features</h2>
+
+Here're some of the project's best features:
+
+- Firebase Authetication
+- Firebase Firestore
+
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+- Firebase
+- Firestore
+- Flutter
+
+<h2>💖Like my work?</h2>
+
+Contact with me<p>https://t.me/tangim4103</p>

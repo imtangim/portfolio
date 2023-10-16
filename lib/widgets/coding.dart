@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:portfolio/models/secrets.dart';
 import 'package:portfolio/widgets/animatedlinearprogressbar.dart';
 
 class Coding extends StatelessWidget {
@@ -13,7 +14,7 @@ class Coding extends StatelessWidget {
     String username = "imtangim";
     final response = await http.get(
       Uri.parse('https://api.github.com/users/$username/repos'),
-      headers: {'User-Agent': 'Dart HTTP Client'},
+     headers: {'Authorization': 'Bearer $token'},
     );
 
     if (response.statusCode == 200) {
