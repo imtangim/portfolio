@@ -11,9 +11,9 @@
 
 <h2>🚀 Demo</h2>
 
-[![Video](https://img.youtube.com/vi/vuGF1sW_yiI/maxresdefault.jpg)](https://www.youtube.com/watch?v=vuGF1sW_yiI)
+[![Video](https://img.youtube.com/vi/sMssfvnuQF0/maxresdefault.jpg)](https://www.youtube.com/watch?v=sMssfvnuQF0)
 
-[Watch the Video](https://youtu.be/vuGF1sW_yiI)
+[Watch the Video](https://youtu.be/sMssfvnuQF0)
 
 <h2>🧐 Features</h2>
 
@@ -26,10 +26,8 @@ Here're some of the project's best features:
 
 Technologies used in the project:
 
-- Firebase
-- Firestore
 - Flutter
-
+- API - github, youtube
 <h2>💖Like my work?</h2>
 
 Contact with me<p>https://t.me/tangim4103</p>
