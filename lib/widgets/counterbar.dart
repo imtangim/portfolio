@@ -30,7 +30,7 @@ class CounterBar extends StatelessWidget {
   Future<int> subcribercounter() async {
     final response = await http.get(
       Uri.parse(
-          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key=AIzaSyAN9pmiEdVfb9N927QllQWYE-_8lmWAXQQ'),
+          'https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCoI_FhiiPUjTqKf07XQ80dA&key="api-key'),
     );
     dynamic data = json.decode(response.body);
     if (response.statusCode == 200) {
